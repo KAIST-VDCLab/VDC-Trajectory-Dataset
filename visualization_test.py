@@ -14,14 +14,14 @@ scene_list = raw_data_dir.glob('landmark/*.csv')
 def bounding_box(x_center, y_center, heading_deg, length, width, px2meter):
     heading_rad = np.pi * heading_deg / 180
     length_cos = 0.5 * length * np.cos(heading_rad)
-    width_cos = 0.5 * width * np.cos(heading_rad)
     length_sin = 0.5 * length * np.sin(heading_rad)
+    width_cos = 0.5 * width * np.cos(heading_rad)
     width_sin = 0.5 * width * np.sin(heading_rad)
  
     pos1 = np.array([x_center - length_cos - width_sin, y_center - length_sin + width_cos]) / px2meter
-    pos2 = np.array([x_center - length_cos + width_sin, y_center - length_sin - width_cos])/ px2meter
-    pos3 = np.array([x_center + length_cos + width_sin, y_center + length_sin - width_cos])/ px2meter
-    pos4 = np.array([x_center + length_cos - width_sin, y_center + length_sin + width_cos])/ px2meter
+    pos2 = np.array([x_center - length_cos + width_sin, y_center - length_sin - width_cos]) / px2meter
+    pos3 = np.array([x_center + length_cos + width_sin, y_center + length_sin - width_cos]) / px2meter
+    pos4 = np.array([x_center + length_cos - width_sin, y_center + length_sin + width_cos]) / px2meter
 
     return shapely.Polygon((pos1, pos2, pos3, pos4))
 
@@ -48,12 +48,14 @@ for scene_landmark in scene_list:
     recording_meta = pd.read_csv(raw_data_dir / f'recordingMeta/{scene_id}_recordingMeta.csv')
     px2meter = recording_meta['px2meter'][0]
 
-
+    # Draw lane segments
     for col_index in np.arange(0, len(map_seg.columns), 2):
+        segment_type = map_seg.columns[col_index].split('_')[0]
         x_col = map_seg.iloc[:, col_index].dropna().to_numpy() 
         y_col = map_seg.iloc[:, col_index+1].dropna().to_numpy() 
-        ax.scatter(x_col, -y_col, color='black')
+        ax.fill(x_col, -y_col, color='magenta' if segment_type == 'intersection' else 'grey', alpha=0.5)
 
+    # Draw tracked objects
     for frame in frame_list:
         frame_idx = int(frame.split('_')[1])
 
@@ -76,7 +78,7 @@ for scene_landmark in scene_list:
             width = car['width'] # meters
 
             car_bb = bounding_box(x_pos, y_pos, heading_deg, length, width, px2meter)
-            ax.fill(*car_bb.exterior.xy, color='blue', alpha=0.5)
+            ax.fill(*car_bb.exterior.xy, color='blue', alpha=0.2)
 
 
         for idx, p_car in parked_cars_in_frame.iterrows():
