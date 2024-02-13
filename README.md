@@ -1,15 +1,12 @@
-# Beyond the Data Imbalance: Employing the Heterogeneous Datasets for Vehicle Maneuver.
+# Heterogeneous Datasets for Vehicle Maneuver.
 
 This page contains the drone dataset used in our paper: Beyond the Data Imbalance: Employing the
 Heterogeneous Datasets for Vehicle Maneuver
 
-<!-- ![Continuous integration](https://github.com/waymo-research/waymax/actions/workflows/ci-build.yml/badge.svg)
-[![arXiv](https://img.shields.io/badge/cs.RO-2310.08710-b31b1b?logo=arxiv&logoColor=red)](https://arxiv.org/abs/2310.08710) -->
-
 [**Paper**](paperlink)
-| [**Documentation**](https://waymo-research.github.io/waymax/docs/)
-| [**Download**](downloadpage)
-| [**Tutorials**](https://waymo-research.github.io/waymax/docs/getting_started.html)
+│ [**Documentation**](https://waymo-research.github.io/waymax/docs/)
+│ [**Download**](downloadpage)
+│ [**Tutorials**](example.ipynb)
 
 ## Contents
 1. [Overview](#overview)
@@ -17,43 +14,63 @@ Heterogeneous Datasets for Vehicle Maneuver
 3. [Dataset Information](#dataset-information)
 ## Overview
 
-Drone dataset captured over several intersections in Daejeon, South Korea
+This is the drone dataset captured over several intersections in Daejeon, South Korea. The dataset contains two directories: ```raw``` contains the trajectory data for the tracked objects in the intersection, while ```processed``` contains the processed information from the raw data used to train the model in our paper. 
 
 ## Getting Started
 
 
 ### Download
 
-You can download the dataset from the releases page. Extract the zip files and make sure the dataset directory structure is as follows:
+You can download the dataset from the [releases](#releases) page. Extract the zip files and make sure the dataset directory structure is as follows:
 
 ```
 data_root
-- processed
-    - conversion
-    - link_idx
-    - maneuver_index
-    - nearest_outlet_state
-    - outlet_node_state
-    - total_traj
-    - plots
-    - folder_tree
-- raw
-    - background
-    - landmark
-    - mapSegmentation
-    - recordingMeta
-    - segmentation
-    - tracks
-    - tracksMeta
+├── processed
+│   ├── conversion
+│   ├── link_idx
+│   ├── maneuver_index
+│   ├── nearest_outlet_state
+│   ├── outlet_node_state
+│   ├── total_traj
+│   ├── plots
+│   └── folder_tree
+└── raw
+    ├── background
+    ├── landmark
+    ├── mapSegmentation
+    ├── recordingMeta
+    ├── segmentation
+    ├── tracks
+    └── tracksMeta
 ```
 
 ### Examples
 
-Please take a look at the colab files for examples on how to use the dataset
+Please take a look at the [example notebook](https://github.com/itsbman/drone_dataset/blob/master/example.ipynb) on how to use the information contained in the dataset.
 
 ## Dataset Information
 
 ### Statistics
+
+- No of tracked objects at each intersection
+
+| Intersection Id | Cars| Pedestrian | Bicycle |
+| :---: | :---: | :---: | :---: |
+| 1 | 788 | 135 | 46 |
+| 3 | 71 | 0 | 1 |
+| 4 | 184 | 0 | 5 |
+| 5 | 110 | 105 | 8 |
+| 6 | 77| 90 | 4 |
+
+- Comparison with other datasets
+
+<!-- | Dataset | Location | Trajectory Counts | Location Counts | Included | FPS | Method
+| :---: | :---: | :---: | :---: | :---: | : ---: | : ---: | 
+| 1 | 788 | 135 | 46 |
+| 3 | 71 | 0 | 1 |
+| 4 | 184 | 0 | 5 |
+| 5 | 110 | 105 | 8 |
+| 6 | 77| 90 | 4 | -->
 
 ## Cite
 
