@@ -4,8 +4,8 @@ This page contains the drone dataset used in our paper: Beyond the Data Imbalanc
 Heterogeneous Datasets for Vehicle Maneuver
 
 [**Paper**](paperlink)
-│ [**Documentation**](https://waymo-research.github.io/waymax/docs/)
-│ [**Download**](downloadpage)
+│ [**Documentation**](https://github.com/itsbman/drone_dataset/tree/master/docs)
+│ [**Download**](https://github.com/itsbman/drone_dataset/releases)
 │ [**Tutorials**](example.ipynb)
 
 ## Contents
@@ -14,6 +14,10 @@ Heterogeneous Datasets for Vehicle Maneuver
 3. [Dataset Information](#dataset-information)
 ## Overview
 
+<div align="center">
+<img src="./graphics/demo.gif" width="426"/>
+</div>
+
 This is the drone dataset captured over several intersections in Daejeon, South Korea. The dataset contains two directories: ```raw``` contains the trajectory data for the tracked objects in the intersection, while ```processed``` contains the processed information from the raw data used to train the model in our paper. 
 
 ## Getting Started
@@ -21,7 +25,7 @@ This is the drone dataset captured over several intersections in Daejeon, South 
 
 ### Download
 
-You can download the dataset from the [releases](#releases) page. Extract the zip files and make sure the dataset directory structure is as follows:
+You can download the dataset from the [releases](https://github.com/itsbman/drone_dataset/releases) page. Extract the zip files and make sure the dataset directory structure is as follows:
 
 ```
 data_root
