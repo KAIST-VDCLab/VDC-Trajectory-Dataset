@@ -4,6 +4,8 @@ import pandas as pd
 import numpy as np
 import shapely
 import os
+import mediapy
+
 
 raw_data_dir = Path('dataset/drone_dataset/Drone_data_raw/raw')
 
@@ -31,8 +33,9 @@ tot_stat = dict()
 for scene_landmark in scene_list:
 
     # scene_stat = []
-
-    # fig, ax = plt.subplots(1, 1)
+    imgs = []
+    fig, ax = plt.subplots(1, 1)
+    plt.axis([20, 100, -70, 10])
 
     scene_id = scene_landmark.name.split('_')[0]
     int_id = scene_id[:2]
@@ -69,7 +72,7 @@ for scene_landmark in scene_list:
         segment_type = map_seg.columns[col_index].split('_')[0]
         x_col = map_seg.iloc[:, col_index].dropna().to_numpy() # pixel
         y_col = map_seg.iloc[:, col_index+1].dropna().to_numpy() # pixel
-        # ax.fill(x_col*px2meter/scale, -y_col*px2meter/scale, color='magenta' if segment_type == 'intersection' else 'grey', alpha=0.5)
+        ax.fill(x_col*px2meter/scale, -y_col*px2meter/scale, color='magenta' if segment_type == 'intersection' else 'grey', alpha=0.5)
 
     # Draw tracked objects
     for frame in frame_list:
@@ -86,10 +89,11 @@ for scene_landmark in scene_list:
         ped_x, ped_y = peds_in_frame['xCenter'].to_numpy()/scale, peds_in_frame['yCenter'].to_numpy()/scale
         bic_x, bic_y = bicycles_in_frame['xCenter'].to_numpy()/scale, bicycles_in_frame['yCenter'].to_numpy()/scale
 
-        # ax.scatter(ped_x, ped_y, color='green')
-        # ax.scatter(bic_x, bic_y, color='orange')
+        ped_render = ax.scatter(ped_x, ped_y, color='green')
+        bic_render = ax.scatter(bic_x, bic_y, color='orange')
         
         # cars
+        cars_render = []
         for idx, car in cars_in_frame.iterrows():
             heading_deg = car['heading'] # degree
             x_pos = car['xCenter'] # meters
@@ -99,7 +103,7 @@ for scene_landmark in scene_list:
             width = car['width'] # meters
 
             car_bb = bounding_box(x_pos, y_pos, heading_deg, length, width, scale)
-            # ax.fill(*car_bb.exterior.xy, color='blue', alpha=0.2)
+            cars_render.append(ax.fill(*car_bb.exterior.xy, color='blue', alpha=0.2))
 
         # parked cars
         for idx, p_car in parked_cars_in_frame.iterrows():
@@ -114,7 +118,22 @@ for scene_landmark in scene_list:
             p_car_bb = bounding_box(x_pos, y_pos, heading_deg, length, width, scale)
             # ax.fill(*p_car_bb.exterior.xy, color='cyan', alpha=0.5)
 
+        fig.canvas.draw()
+        image_from_plot = np.frombuffer(fig.canvas.tostring_rgb(), dtype=np.uint8)
+        image_from_plot = image_from_plot.reshape(fig.canvas.get_width_height()[::-1] + (3,))
+        imgs.append(image_from_plot)
+        ped_render.remove()
+        bic_render.remove()
+        for car in cars_render:
+            for c in car:
+                c.remove()
+    
 
+    with mediapy.VideoWriter('demo.gif', shape=(480, 640), codec='gif', fps=10) as  writer:
+        for img in imgs:
+            writer.add_image(img)
+    
+    break
     # plt.axis('equal')
     # plt.show()
 # tot_stat = pd.concat(tot_stat, axis=1).fillna(value=0)
