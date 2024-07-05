@@ -1,7 +1,6 @@
-# Heterogeneous Datasets for Vehicle Maneuver.
+# Beyond the Data Imbalance: Employing the Heterogeneous Datasets for Vehicle Maneuver.
 
-This page contains the drone dataset used in our paper: Beyond the Data Imbalance: Employing the
-Heterogeneous Datasets for Vehicle Maneuver
+This page contains the drone dataset used in our paper
 
 [**Paper**](paperlink)
 │ [**Documentation**](https://github.com/itsbman/drone_dataset/tree/master/docs)
