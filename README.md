@@ -3,8 +3,8 @@
 This page contains the drone dataset used in our paper
 
 [**Paper**](paperlink)
-│ [**Documentation**](https://github.com/itsbman/drone_dataset/tree/master/docs)
-│ [**Download**](https://github.com/itsbman/drone_dataset/releases)
+│ [**Documentation**](https://github.com/KAIST-VDCLab/VDC-Trajectory-Dataset/tree/master/docs)
+│ [**Download**](https://github.com/KAIST-VDCLab/VDC-Trajectory-Dataset/releases)
 │ [**Tutorials**](example.ipynb)
 
 ## Contents
