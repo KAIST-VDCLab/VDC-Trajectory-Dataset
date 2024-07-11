@@ -55,7 +55,7 @@ Please take a look at the [example notebook](https://github.com/itsbman/drone_da
 
 ### Statistics
 
-- No of tracked objects at each intersection
+- No. of tracked objects at each intersection
 
 | Intersection Id | Cars| Pedestrian | Bicycle |
 | :---: | :---: | :---: | :---: |
@@ -65,7 +65,13 @@ Please take a look at the [example notebook](https://github.com/itsbman/drone_da
 | 5 | 110 | 105 | 8 |
 | 6 | 77| 90 | 4 |
 
-- Comparison with other datasets
+- No. of trajectories for each class
+
+| Cars | Pedestrian | Bicycle |
+| :---: | :---: | :---: |
+| 10,555 | 4,353 | 571 |
+
+$*$ Trajectory: 5 second long for 10hz interval.
 
 <!-- | Dataset | Location | Trajectory Counts | Location Counts | Included | FPS | Method
 | :---: | :---: | :---: | :---: | :---: | : ---: | : ---: | 
@@ -80,5 +86,10 @@ Please take a look at the [example notebook](https://github.com/itsbman/drone_da
 If you found this drone dataset or our paper helpful for your own research, please cite:
 
 ```
-cite
+@inproceedings{Beyond2024Jeon,
+  title={Beyond the Data Imbalance: Employing the Heterogeneous Datasets for Vehicle Maneuver Prediction},
+  author={Hyeongseok Jeon, Sanmin Kim, Abi Rahman Syamil, Junsoo Kim and Dongsuk Kum},
+  booktitle={Proceedings of the European Conference on Computer Vision},
+  year={2024}
+}
 ```
