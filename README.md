@@ -83,7 +83,7 @@ $*$ Trajectory: 5 second long for 10hz interval.
 
 ## Cite
 
-If you found this drone dataset or our paper helpful for your own research, please cite:
+If you find this drone dataset or our paper helpful for your own research, please consider citing:
 
 ```
 @inproceedings{Beyond2024Jeon,
